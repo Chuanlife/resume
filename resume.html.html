@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>吳紹銓 Shao Chuan Wu | 履歷</title>
+  <style>
+    /* 基礎設定 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5f7fa;
+    }
+
+    /* 容器與 RWD */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1a365d, #2c5282);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    header .english-name {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    header .job-title {
+      font-size: 1.25rem;
+      background: rgba(255,255,255,0.15);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      font-size: 0.95rem;
+    }
+
+    .contact-info a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #63b3ed;
+    }
+
+    /* 主要內容區（Flexbox 排版）*/
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    section {
+      background: white;
+      padding: 28px 32px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      color: #1a365d;
+      border-bottom: 3px solid #3182ce;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 關於我 */
+    .about p {
+      margin-bottom: 12px;
+      color: #4a5568;
+    }
+
+    /* 技能區 */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-tag {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      border: 1px solid #bee3f8;
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      background: #3182ce;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .skill-category {
+      margin-bottom: 16px;
+    }
+
+    .skill-category h3 {
+      font-size: 1.05rem;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    /* 學歷 */
+    .education-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .education-item .school {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #2d3748;
+    }
+
+    .education-item .period {
+      color: #718096;
+      font-size: 0.95rem;
+    }
+
+    /* 學習與專案 */
+    .project-list {
+      list-style: none;
+    }
+
+    .project-list li {
+      margin-bottom: 14px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .project-list li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #3182ce;
+      font-weight: bold;
+    }
+
+    /* 手機選單按鈕（JavaScript 控制） */
+    .menu-toggle {
+      display: none;
+      background: #3182ce;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 15px auto;
+      transition: background 0.3s;
+    }
+
+    .menu-toggle:hover {
+      background: #2b6cb0;
+    }
+
+    /* 回到頂部按鈕 */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #3182ce;
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+    }
+
+    #back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #back-to-top:hover {
+      background: #2b6cb0;
+      transform: translateY(-3px);
+    }
+
+    /* RWD（回應式設計，彭彭課程重點）*/
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .contact-info {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      section {
+        padding: 22px 20px;
+      }
+
+      .education-item {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 30px 15px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>吳紹銓</h1>
+      <div class="english-name">Shao Chuan Wu</div>
+      <div class="job-title">求職方向：實習工程師</div>
+      <div class="contact-info">
+        <a href="mailto:42659921x@gmail.com">📧 42659921x@gmail.com</a>
+        <span>📱 0905-279-293</span>
+        <span>📍 南投縣</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+      <!-- 關於我 -->
+      <section class="about">
+        <h2>關於我</h2>
+        <p>
+          我是吳紹銓，目前是成為<strong>全端工程師</strong>為目標。透過 YouTube「彭彭的課程」系統學習 HTML、CSS、JavaScript 網頁前端工程入門與進階內容，建立了扎實的網頁基礎能力。
+        </p>
+        <p>
+          雖然求職方向為實習工程師，但我深知前端與後端的密切關係，因此先扎實打下 HTML / CSS / JavaScript 基礎，未來可更快銜接後端開發、API 串接與全端專案。目前持續學習中，期待能進入全端工程師職位，貢獻所學並持續成長。
+        </p>
+      </section>
+
+      <!-- 技能 -->
+      <section>
+        <h2>技能</h2>
+
+        <div class="skill-category">
+          <h3>前端基礎（彭彭 YouTube 課程所學）</h3>
+          <div class="skills-grid">
+            <span class="skill-tag">HTML5 語意標籤</span>
+            <span class="skill-tag">CSS 語法 & Box Model</span>
+            <span class="skill-tag">CSS 選擇器</span>
+            <span class="skill-tag">Flexbox 排版</span>
+            <span class="skill-tag">RWD 回應式設計</span>
+            <span class="skill-tag">CSS3 Transition / Animation</span>
+            <span class="skill-tag">JavaScript 變數與運算</span>
+            <span class="skill-tag">流程控制（判斷 / 迴圈）</span>
+            <span class="skill-tag">函式與物件</span>
+            <span class="skill-tag">HTML DOM 操作</span>
+            <span class="skill-tag">事件處理</span>
+            <span class="skill-tag">表單驗證基礎</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>開發工具</h3>
+          <div class="skills-grid">
+            <span class="skill-tag">Visual Studio Code</span>
+            <span class="skill-tag">瀏覽器開發者工具</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 學歷 -->
+      <section>
+        <h2>學歷</h2>
+        <div class="education-item">
+          <div>
+            <div class="school">中興高中</div>
+            <div>高中學歷</div>
+          </div>
+          <div class="period">畢業</div>
+        </div>
+      </section>
+
+      <!-- 學習與專案經驗 -->
+      <section>
+        <h2>學習與專案經驗</h2>
+        <ul class="project-list">
+          <li>
+            <strong>彭彭老師 YouTube 網頁前端工程課程</strong><br>
+            完整學習 HTML、CSS、JavaScript 入門與進階內容，包含語意化 HTML、Flexbox 切版、RWD、DOM 操作、事件處理、簡易互動效果與表單驗證等。
+          </li>
+          <li>
+            <strong>本履歷網頁（本頁）</strong><br>
+            使用純 HTML + CSS + JavaScript 製作，實作 Flexbox 排版、RWD 回應式設計、hover 效果與簡易 JavaScript 互動（選單與回到頂部功能），作為課程所學的實際應用展示。
+          </li>
+          <li>
+            持續練習小型前端專案，並規劃後續學習後端技術（如 Python、資料庫、API 開發），朝全端工程師目標前進。
+          </li>
+        </ul>
+      </section>
+
+      <!-- 自我期許 -->
+      <section>
+        <h2>自我期許</h2>
+        <p>
+          雖然目前以高中學歷起步，但我透過系統性線上課程扎實學習前端基礎，並立志成為全端工程師。我具備自我學習能力與實作意願，願意從基礎學起，快速吸收新技術。誠摯希望能獲得面試機會。
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <!-- 回到頂部按鈕 -->
+  <button id="back-to-top" title="回到頂部">↑</button>
+
+  <script>
+    // ===== JavaScript（彭彭課程：DOM 操作 + 事件處理） =====
+
+    // 回到頂部按鈕顯示 / 隱藏
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.classList.remove("show");
+      }
+    });
+
+    // 點擊回到頂部
+    backToTopBtn.addEventListener("click", function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+</body>
+</html>
